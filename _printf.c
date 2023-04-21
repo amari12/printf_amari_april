@@ -22,7 +22,7 @@ int _printf(const char *format, ...)
 		{
 			i++; /*move to char after % */
 		/*handle conversion specifiers, format string, address i, inputs/args*/
-			handle_conversion(format, &i, inputs);
+			printed_chars += handle_conversion(format, &i, inputs);
 		} /*if*/
 		else /*not %*/
 		{

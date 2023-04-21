@@ -13,6 +13,7 @@ int handle_conversion(const char *format, int *i, va_list inputs)
 {
 	int printed_chars = 0;
 	char c;
+	int nr; /*for _print_int*/
 
 	switch (format[*i])
 	{
@@ -33,7 +34,8 @@ int handle_conversion(const char *format, int *i, va_list inputs)
 		case 'i':
 			/*this is like using OR*/
 			/*ptr = va_arg(inputs, int);*/
-			printed_chars += _print_int(inputs);
+			nr = va_arg(inputs, int);
+			printed_chars += _print_int(nr);
 			break;
 		default:
 			/*not followed by any of the above*/
@@ -64,7 +66,6 @@ int _print_str(va_list inputs)
 		_putchar(str[i]); /*print value at address*/
 		counter++; /*increase counter for each char printed*/
 	} /*for*/
-	_putchar('\n');
 	return (counter);
 } /*_print_str*/
 
@@ -74,21 +75,35 @@ int _print_str(va_list inputs)
  * Return: int (nr of chars printed)
  */
 
-int _print_int(va_list inputs)
+int _print_int(int nr)
 {
-	int nr = va_arg(inputs, int); /*full number*/
-	int counter = 0;
+	/*int nr = va_arg(inputs, int);*/ /*full number*/
+	int counter, count = 0;
 	int int_char; /*single digit to print using putchar*/
 	int number = nr; /*going to change*/
 
-	while (number > 0)
-	{
-		int_char = number % 10; /*get the right-side digit*/
-		_putchar(int_char + '0'); /*convert to ASCII +0*/
-		number = number / 10; /*remove right-side digit*/
-		counter++; /*increase counter for each digit*/
-	} /*while*/
-	_putchar('\n');
+	if (number < 0)
+	{ /*if negative, change to positive and write -*/
+		number = -number;
+		_putchar('-');
+	}
+
+	if (number/10 != 0)
+	{ /*go through number until end using recursion*/
+		_print_int(number/10);
+	}
+	/*print digit when end of recursion is reached & traverse back*/
+	int_char = number % 10;
+	_putchar(int_char + '0');
+
+	/*get length = nr of chars printed*/
+        while (number > 0)
+        {
+                number = number/10;
+                count++;
+        }
+        counter = count;
+	
 	return (counter);
 } /*_print_int*/
 
