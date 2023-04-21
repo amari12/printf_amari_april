@@ -30,6 +30,10 @@ int main(void)
 	_printf("Binary of 125: %b\n", 125);
 	_printf("Binary of 65: %b\n", 65);
 	_printf("Binary of 99: %b\n", 99);
+	printf("Haxedecimal:\n");
+	_printf("Hex of *: %x\n", '*');
+	_printf("Hex of 8: %x\n", '8');
+	_printf("Hex of Q: %x\n", 'Q');
 
 	return (0);
 }

@@ -40,6 +40,9 @@ int handle_conversion(const char *format, int *i, va_list inputs)
 		case 'b':
 			printed_chars += _print_bin(inputs);
 			break;
+		case 'x':
+			printed_chars += _print_hex(inputs);
+			break;
 		default:
 			/*not followed by any of the above*/
 			/*print the % and the next char (+2 chars printed)*/
