@@ -2,7 +2,7 @@
 
 /**
  * _printf - produces output according to a format
- * format: format string
+ * @format: format string
  * Return: the number of characters printed
  */
 
@@ -26,7 +26,7 @@ int _printf(const char *format, ...)
 		{
 			_putchar(format[i]); /*print normal char*/
 			printed_chars++; /*increase count*/
-		} /*else*/	
+		} /*else*/
 	} /*for*/
 
 	va_end(inputs); /*close list*/
