@@ -26,7 +26,10 @@ int main(void)
 	len2 = printf("Percent:[%%]\n");
 	_printf("Len:[%d]\n", len);
 	printf("Len:[%d]\n", len2);
-
+	printf("Binary:\n");
+	_printf("Binary of 125: %b\n", 125);
+	_printf("Binary of 65: %b\n", 65);
+	_printf("Binary of 99: %b\n", 99);
 
 	return (0);
 }

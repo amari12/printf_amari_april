@@ -37,6 +37,9 @@ int handle_conversion(const char *format, int *i, va_list inputs)
 			nr = va_arg(inputs, int);
 			printed_chars += _print_int(nr);
 			break;
+		case 'b':
+			printed_chars += _print_bin(inputs);
+			break;
 		default:
 			/*not followed by any of the above*/
 			/*print the % and the next char (+2 chars printed)*/
@@ -107,4 +110,33 @@ int _print_int(int nr)
 	return (counter);
 } /*_print_int*/
 
+/**
+ * _print_bin - print number as binary
+ * @inputs: inputs
+ * Return: int (printed chars)
+ */
 
+int _print_bin(va_list inputs)
+{
+	int i, j, counter = 0;
+	int binary[32];
+	int number;
+
+	number = va_arg(inputs, int);
+
+	for (i = 0; number > 0; i++)
+	{ /*convert to binary*/
+		binary[i] = number % 2;
+		number = number / 2;
+	}
+	
+	_putchar(48); /*first 0*/
+
+	for (j = i - 1; j >= 0; j--)
+	{ /*print in reverse*/
+		_putchar(binary[j] + '0');
+		counter++;
+	}
+	return (counter);
+
+} /*_print_bin*/
