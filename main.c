@@ -33,7 +33,9 @@ int main(void)
 	printf("Haxedecimal:\n");
 	_printf("Hex of *: %x\n", '*');
 	_printf("Hex of 8: %x\n", '8');
-	_printf("Hex of Q: %x\n", 'Q');
+	_printf("Hex of q: %x\n", 'q');
+	_printf("HEX of Q: %X\n", 'Q');
+	_printf("HEX of 8: %X\n", '8');
 
 	return (0);
 }
