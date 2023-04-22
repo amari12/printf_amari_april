@@ -11,6 +11,10 @@ int main(void)
 {
 	int len;
 	int len2;
+	unsigned int ui, uj;
+
+	ui = (unsigned int)INT_MAX + 1024;
+	uj = (unsigned int)56;
 
 	len = _printf("Let's try to printf a simple sentence.\n");
 	len2 = printf("Let's try to printf a simple sentence.\n");
@@ -36,6 +40,12 @@ int main(void)
 	_printf("Hex of q: %x\n", 'q');
 	_printf("HEX of Q: %X\n", 'Q');
 	_printf("HEX of 8: %X\n", '8');
+	_printf("Unsigned octal:[%o]\n", ui);
+	printf("Unsigned octal:[%o]\n", ui);
+	_printf("Unsigned octal of 56:[%o]\n", uj);
+        printf("Unsigned octal of 56:[%o]\n", uj);
+	_printf("Unsigned:[%u]\n", ui);
+	printf("Unsigned:[%u]\n", ui);
 
 	return (0);
 }

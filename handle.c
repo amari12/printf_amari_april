@@ -11,9 +11,8 @@
 
 int handle_conversion(const char *format, int *i, va_list inputs)
 {
-	int printed_chars = 0;
+	int printed_chars = 0, nr; /*nr for print int*/
 	char c;
-	int nr; /*for _print_int*/
 
 	switch (format[*i])
 	{
@@ -22,8 +21,7 @@ int handle_conversion(const char *format, int *i, va_list inputs)
 			_putchar(c);
 			printed_chars++;
 			break;
-		case 's':
-			/*ptr = va_arg(inputs, char);*/
+		case 's': /*ptr = va_arg(inputs, char);*/
 			printed_chars += _print_str(inputs);
 			break;
 		case '%':
@@ -32,8 +30,6 @@ int handle_conversion(const char *format, int *i, va_list inputs)
 			break;
 		case 'd':
 		case 'i':
-			/*this is like using OR*/
-			/*ptr = va_arg(inputs, int);*/
 			nr = va_arg(inputs, int);
 			printed_chars += _print_int(nr);
 			break;
@@ -46,9 +42,13 @@ int handle_conversion(const char *format, int *i, va_list inputs)
 		case 'X':
 			printed_chars += _print_hex(inputs);
 			break;
-		default:
-			/*not followed by any of the above*/
-			/*print the % and the next char (+2 chars printed)*/
+		case 'o':
+			printed_chars += _print_oct(inputs);
+			break;
+		case 'u':
+			printed_chars += _print_ud(inputs);
+			break;
+		default: /*not followed by any of the above*/
 			c = format[*i];
 			_putchar('%');
 			_putchar(c);
@@ -108,11 +108,11 @@ int _print_int(int nr)
 	/*get length = nr of chars printed*/
         while (number > 0)
         {
-                number = number/10;
+                number = number / 10;
                 count++;
         }
-        counter = count;
-	
+	counter = count;
+
 	return (counter);
 } /*_print_int*/
 
