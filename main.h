@@ -9,10 +9,12 @@
 /*in _printf.c*/
 int _printf(const char *format, ...);
 int _putchar(char c);
-/*in handle.c*/
+/*in handle.c -> handle_task0.c*/
 int handle_conversion(const char *format, int *i, va_list inputs);
 int _print_str(va_list inputs);
+/*in handle_task1.c*/
 int _print_int(int nr);
+/*in handle_task2.c*/
 int _print_bin(va_list inputs);
 /*in handle_task3.c*/
 int _print_hex(va_list inputs);
