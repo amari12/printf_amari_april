@@ -12,6 +12,7 @@ int main(void)
 	int len;
 	int len2;
 	unsigned int ui, uj;
+	int i = 21, j = -21;
 
 	ui = (unsigned int)INT_MAX + 1024;
 	uj = (unsigned int)56;
@@ -46,6 +47,17 @@ int main(void)
         printf("Unsigned octal of 56:[%o]\n", uj);
 	_printf("Unsigned:[%u]\n", ui);
 	printf("Unsigned:[%u]\n", ui);
+	_printf("Rev String:[%r]\n", "I am a string !");
+	printf("Rot13 of \"I am a string !\":\n");
+	_printf("%R\n", "I am a string !");
+	_printf("Length:[%+d, %+i]\n", i, j);
+	printf("Length:[%+d, %+i]\n", i, j);
+	_printf("Space flag: [% d, % i]\n", i, j);
+	printf("Space flag: [% d, % i]\n", i, j);
+	_printf("Hash flag: [%#d, %#i]\n", i, j);
+	printf("Hash flag: [%#d, %#i]\n", i, j);
+	_printf("Multiple flags test: [%+#d, %+#d]\n", i, j);
+	printf("Multiple flags: [%+#d, %+#d]\n", i, j);
 
 	return (0);
 }

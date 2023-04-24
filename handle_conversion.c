@@ -36,11 +36,49 @@ int handle_conversion(const char *format, int *i, va_list inputs)
 		case 'b':
 			printed_chars += _print_bin(inputs);
 			break;
-		case 'x':
-			printed_chars += _print_hex(inputs);
+		default: /*not followed by any of the above*/
+			/* check second batch of format specifiers*/
+			printed_chars += handle_conversion2(format, i, inputs);
+			if (printed_chars == 0)
+			{ /*second batch also came back with nothing*/
+				c = format[*i];
+				_putchar('%');
+				_putchar(c);
+				printed_chars += 2;
+			}
 			break;
-		case 'X':
-			printed_chars += _print_hex(inputs);
+	} /*switch*/
+	return (printed_chars);
+} /*handle_conversion*/
+
+/**
+ * handle_conversion2 - second part of switch
+ * @format: fomrat string
+ * @i: index
+ * @inputs: va_list input arguments
+ * Return: int (printed chars)
+ */
+
+int handle_conversion2(const char *format, int *i, va_list inputs)
+{
+	int printed_chars = 0;
+
+	switch (format[*i])
+	{
+		case 'r':
+			printed_chars += _print_str_rev(inputs);
+			break;
+		case 'R':
+			printed_chars += _print_rot13(inputs);
+			break;
+		case '+':
+			printed_chars += _print_plus(format, i, inputs);
+			break;
+		case ' ':
+			printed_chars += _print_space(format, i, inputs);
+			break;
+		case '#':
+			printed_chars += _print_zeros(format, i, inputs);
 			break;
 		case 'o':
 			printed_chars += _print_oct(inputs);
@@ -48,14 +86,45 @@ int handle_conversion(const char *format, int *i, va_list inputs)
 		case 'u':
 			printed_chars += _print_ud(inputs);
 			break;
-		default: /*not followed by any of the above*/
-			printed_chars += handle_conversion2(format, i, inputs);
-			c = format[*i];
-			_putchar('%');
-			_putchar(c);
-			printed_chars += 2;
+		case 'x':
+			printed_chars += _print_hex(inputs);
+			break;
+		case 'X':
+			printed_chars += _print_hex(inputs);
+			break;
+		default: /*go back to handle_conversion() */
+			printed_chars += handle_conversion3(format, i, inputs);
+			if (printed_chars == 0)
+				return (0); /*no match*/
 			break;
 	} /*switch*/
+	return (printed_chars); /*if there was a match*/
+} /*handle conversion2 */
+
+/**
+ * handle_conversion3 - handles coversion specifiers and prints accordingly
+ * @format: format string
+ * @i: index
+ * @inputs: va_list of inputs/arguments
+ * Return: void for now
+ */
+
+int handle_conversion3(const char *format, int *i, va_list inputs)
+{
+	int printed_chars = 0;
+
+	switch (format[*i])
+	{
+		case 'S':/* print non printable chars*/
+			printed_chars += _print_npc(inputs);
+			break;
+		case 'p':
+			printed_chars += _print_ptr(inputs);
+			break;
+		default: /*not followed by any of the above*/
+			/*printed_chars += handle_conversion_l_h(format, i, inputs);*/
+		break;
+	}
 	return (printed_chars);
-} /*handle_conversion*/
+}
 

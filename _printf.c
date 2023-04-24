@@ -35,13 +35,3 @@ int _printf(const char *format, ...)
 	return (printed_chars);
 } /*_printf*/
 
-/**
- * _putchar - writes char to standard output
- * @c: char
- * Return: succes - 1, error - (-1)
- */
-
-int _putchar(char c)
-{
-	return (write(1, &c, 1));
-}

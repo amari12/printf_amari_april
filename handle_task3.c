@@ -69,7 +69,6 @@ int _print_oct(va_list inputs)
 		counter++;
 	} /*while*/
 	oct[i] = '\0'; /*string terminator*/
-	
 	/*for loop to putchar string*/
 	for (i = counter; i >= 0; i--)
 	{
@@ -87,34 +86,35 @@ int _print_oct(va_list inputs)
 int _print_ud(va_list inputs)
 {
 	unsigned int num, cp, p = 1;
-        int counter = 1, digit, i;
+	int counter = 1, digit, i;
 
-        /*arg to uns int*/
-        num = va_arg(inputs, unsigned int);
-        /*count the number of digits */
-        cp = num;
-        if (num == 0)
-        {
-                _putchar('0');
-                return 1;
-        }
-        while (cp >= 10)
-        {
-                cp /= 10;
-                counter++;
-        }
-        /*calculate the power of 10 needed for the leftmost digit*/
-        for (i = 1; i < counter; i++)
-        {
-        p *= 10;
-        }
-        /* print the digits in rev order*/
-        while (counter > 0)
-        {
-                digit = (num / p) % 10;
-                _putchar('0' + digit);
-                p /= 10;
-                counter--;
-        }
-        return (counter + 1);
+	/*arg to uns int*/
+	num = va_arg(inputs, unsigned int);
+	/*count the number of digits */
+	cp = num;
+	if (num == 0)
+	{
+		_putchar('0');
+		return (1);
+	}
+	while (cp >= 10)
+	{
+		cp /= 10;
+		counter++;
+	}
+	/*calculate the power of 10 needed for the leftmost digit*/
+	for (i = 1; i < counter; i++)
+	{
+		p *= 10;
+	}
+	/* print the digits in rev order*/
+	while (counter > 0)
+	{
+		digit = (num / p) % 10;
+		_putchar('0' + digit);
+		p /= 10;
+		counter--;
+	}
+	return (counter + 1);
 }
+
