@@ -53,7 +53,7 @@ int handle_conversion(const char *format, int *i, va_list inputs)
 
 /**
  * handle_conversion2 - second part of switch
- * @format: fomrat string
+ * @format: format string
  * @i: index
  * @inputs: va_list input arguments
  * Return: int (printed chars)
@@ -72,6 +72,7 @@ int handle_conversion2(const char *format, int *i, va_list inputs)
 			printed_chars += _print_rot13(inputs);
 			break;
 		case '+':
+			/*printed_chars += _check_next_flag(format, i ,inputs);*/
 			printed_chars += _print_plus(format, i, inputs);
 			break;
 		case ' ':
@@ -122,9 +123,65 @@ int handle_conversion3(const char *format, int *i, va_list inputs)
 			printed_chars += _print_ptr(inputs);
 			break;
 		default: /*not followed by any of the above*/
-			/*printed_chars += handle_conversion_l_h(format, i, inputs);*/
-		break;
+			printed_chars += handle_conversion_l_h(format, i, inputs);
+			if (printed_chars == 0)
+				return (0);
+			break;
 	}
 	return (printed_chars);
 }
 
+/**
+ * handle_conversion_l_h - handles the long and short formats
+ * @format: either long l or short h
+ * @i: index
+ * @inputs: input arguments
+ * Return: printed_chars
+ */
+
+int handle_conversion_l_h(const char *format, int *i, va_list inputs)
+{
+	int printed_chars = 0/*, nr*/;
+	/*char c;*/
+	int *j;
+
+	switch (format[*i])
+	{
+		case 'l':
+			j = i++;
+			switch (format[*j])
+			{
+				case 'i':
+				case 'd':
+				case 'u':
+				case 'o':
+				case 'x':
+				case 'X':
+					printed_chars += handle_conversion(format, j, inputs);
+					break;
+				default:
+					break;
+			}
+			break;
+		case 'h':
+			j = i++;
+			switch (format[*j])
+			{
+				case 'i':
+				case 'd':
+				case 'u':
+				case 'o':
+				case 'x':
+				case 'X':
+					printed_chars += handle_conversion(format, j, inputs);
+					break;
+				default:
+					break;
+			}
+			break;
+		default:
+			printed_chars = 0; /*no match*/
+			break;
+	}
+	return (printed_chars);
+}
